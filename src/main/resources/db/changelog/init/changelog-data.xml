@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="小五" id="data-tag-1">
+        <tagDatabase tag="data_version_1.1"/>
+    </changeSet>
+
+    <changeSet author="小五" id="data-1">
+       <sql>
+           INSERT INTO "security_role"("id", "description", "name", "opt_lock", "resort")
+           VALUES ('df24b0ff-5c80-4c73-9b05-98786ca5dbae', 'Super Administrator Role,Used to edit hotel information, hotel manager.',
+           'SystemAdminRole', 1, NULL);
+       </sql>
+    </changeSet>
+
+    <changeSet author="小五" id="data-tag-2">
+        <tagDatabase tag="data_version_1.2"/>
+    </changeSet>
+</databaseChangeLog>

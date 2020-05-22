@@ -1,0 +1,58 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="table-tag-1" author="小五">
+        <tagDatabase  tag="version_1.1"/>
+    </changeSet>
+    <changeSet id="table-1" author="小五">
+        <createTable tableName="SECURITY_USER">
+            <column name="id" type="varchar(64)" encoding="utf8" remarks="Id">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="resort" type="varchar(255)" encoding="utf8" remarks="酒店代码"/>
+            <column name="name" type="varchar(255)" encoding="utf8" remarks="名字">
+                <constraints unique="true"/>
+            </column>
+            <column name="employee_id" type="varchar(255)" encoding="utf8" remarks="编号"/>
+            <column name="password" type="varchar(255)" encoding="utf8" remarks="密码"/>
+            <column name="opt_lock" type="int(512)" encoding="utf8" remarks="乐观锁"/>
+            <column name="email" type="varchar(64)" encoding="utf8" remarks="邮箱"/>
+            <column name="mobile" type="varchar(64)" encoding="utf8" remarks="手机"/>
+            <column name="expiration_date" type="timestamp" encoding="utf8" remarks="过期时间"/>
+            <column name="last_login" type="timestamp" encoding="utf8" remarks="最后登陆时间"/>
+        </createTable>
+        <createTable tableName="SECURITY_ROLE">
+            <column name="id" type="varchar(64)" encoding="utf8" remarks="Id">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)" encoding="utf8" remarks="描述"/>
+            <column name="resort" type="varchar(255)" encoding="utf8" remarks="酒店代码"/>
+            <column name="name" type="varchar(255)" encoding="utf8" remarks="名字">
+                <constraints unique="true"/>
+            </column>
+            <column name="opt_lock" type="int(512)" encoding="utf8" remarks="乐观锁"/>
+        </createTable>
+        <createTable tableName="SECURITY_PERMISSIONS">
+            <column name="role_id" type="varchar(255)" encoding="utf8" remarks="role_id">
+                <constraints nullable="false" referencedTableName="security_role" referencedColumnNames="id" deleteCascade="false" foreignKeyName="role_id"/>
+            </column>
+            <column name="permissions" type="varchar(255)" encoding="utf8" remarks="权限外键">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="SECURITY_USER_ROLES">
+            <column name="users_id" type="varchar(255)" encoding="utf8" remarks="users外键">
+                <constraints primaryKey="true" nullable="false" referencedTableName="security_user" referencedColumnNames="id" deleteCascade="false" foreignKeyName="users_id"/>
+            </column>
+            <column name="roles_id" type="varchar(255)" encoding="utf8" remarks="roles外键">
+                <constraints primaryKey="true" nullable="false" referencedTableName="security_role" referencedColumnNames="id" deleteCascade="false" foreignKeyName="roles_id"/>
+            </column>
+        </createTable>
+<!--        <renameColumn tableName="SECURITY_USER" oldColumnName="name" newColumnName="user_name"/>-->
+    </changeSet>
+    <changeSet author="小五" id="table-tag-2">
+        <tagDatabase tag="version_1.2"/>
+    </changeSet>
+</databaseChangeLog>

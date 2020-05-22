@@ -1,0 +1,48 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--这里设置tag点,以便回滚操作等-->
+    <changeSet id="table-tag-1" author="小五">
+        <tagDatabase tag="version_1.1"/>
+    </changeSet>
+
+    <!--建role表-->
+    <changeSet id="1" author="小五">
+        <createTable tableName="role" remarks="role表">
+            <column name="rolename" type="varchar(64)"/>
+            <column name="password" type="varchar(64)"/>
+        </createTable>
+    </changeSet>
+
+    <!--设置第二个tag点-->
+    <changeSet id="table-tag-2" author="小五">
+        <tagDatabase tag="version_1.2"/>
+    </changeSet>
+
+
+    <changeSet id="2" author="小五">
+        <!--建user表-->
+        <createTable tableName="user" remarks="user表">
+            <column name="username" type="varchar(64)"/>
+            <column name="password" type="varchar(64)"/>
+            <column name="state" type="int(11)"/>
+            <column name="identity" type="int(11)"/>
+        </createTable>
+        <!--数据操作-->
+        <sql>
+            INSERT INTO "user"("username","password","state","identity") values ('admin','123',1,999);
+        </sql>
+        <!--rollback操作,如果changeset涉及到了数据操作,必须设置,否则回滚失败-->
+        <rollback>
+            <delete tableName="user">
+                <where>
+                    username='admin'
+                </where>
+            </delete>
+            <dropTable tableName="user"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
