@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 /**
  * @author Wisdom
  */
-/*@Configuration
+@Configuration
 public class LiquibaseConfig {
 
   @Bean
@@ -22,4 +22,4 @@ public class LiquibaseConfig {
     liquibase.setShouldRun(true);
     return liquibase;
   }
-}*/
+}

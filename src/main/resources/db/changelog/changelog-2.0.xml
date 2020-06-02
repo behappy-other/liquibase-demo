@@ -45,4 +45,20 @@
             <dropTable tableName="user"/>
         </rollback>
     </changeSet>
+
+    <!--设置第二个tag点-->
+    <changeSet id="table-tag-3" author="小五">
+        <tagDatabase tag="version_1.2"/>
+    </changeSet>
+
+    <changeSet id="3" author="小五">
+        <addColumn tableName="user">
+            <column name="asd" type="varchar(64)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="changeRollback2-drop" author="小五">
+        <dropTable tableName="role"/>
+        <rollback changeSetId="1" changeSetAuthor="小五"/>
+    </changeSet>
 </databaseChangeLog>

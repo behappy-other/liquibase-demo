@@ -4,19 +4,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet author="小五" id="data-tag-1">
-        <tagDatabase tag="data_version_1.1"/>
+    <changeSet id="1.0-20200528-001" author="wisdom">
+        <createTable tableName="room_info">
+            <column name="id" type="varchar(60)" encoding="utf8" remarks="Id">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="bundle" type="varchar(100)" encoding="utf8"/>
+            <column name="flag" type="boolean" encoding="utf8"/>
+            <column name="floor" type="varchar(255)" encoding="utf8"/>
+            <column name="floor_description" type="varchar(100)" encoding="utf8"/>
+            <column name="room_class" type="varchar(20)" encoding="utf8"/>
+            <column name="room_number" type="varchar(30)" encoding="utf8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_status" type="varchar(20)" encoding="utf8"/>
+            <column name="room_type" type="varchar(60)" encoding="utf8"/>
+            <column name="smoking" type="varchar(20)" encoding="utf8"/>
+            <column name="bed_quantity" type="varchar(20)" encoding="utf8"/>
+            <column name="features" type="clob" encoding="utf8"/>
+            <column name="rate_amount" type="varchar(20)" encoding="utf8"/>
+            <column name="rate_code" type="varchar(20)" encoding="utf8"/>
+            <column name="room_type_description" type="varchar(100)" encoding="utf8"/>
+        </createTable>
     </changeSet>
 
-    <changeSet author="小五" id="data-1">
-       <sql>
-           INSERT INTO "security_role"("id", "description", "name", "opt_lock", "resort")
-           VALUES ('df24b0ff-5c80-4c73-9b05-98786ca5dbae', 'Super Administrator Role,Used to edit hotel information, hotel manager.',
-           'SystemAdminRole', 1, NULL);
-       </sql>
-    </changeSet>
-
-    <changeSet author="小五" id="data-tag-2">
-        <tagDatabase tag="data_version_1.2"/>
+    <changeSet id="1.0-20200528-002" author="wisdom">
+        <tagDatabase tag="1.0.0-SNAPSHOT"/>
     </changeSet>
 </databaseChangeLog>
